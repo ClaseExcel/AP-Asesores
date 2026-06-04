@@ -160,36 +160,6 @@ class EmpresaController extends Controller
         $usuarios_camaracomercio = json_encode($request->usuario_camaracomercio);
         $clave_camaracomercio = json_encode($request->camaracomercioclaveportal);
 
-        if (in_array(null, (array)$request->usuario_ica, true) == false || in_array(null, (array)$request->icaclaveportal, true) == false) {
-            if (in_array(null, (array)$request->usuario_ica, true) == true || in_array(null, (array)$request->icaclaveportal, true) == true) {
-                return response()->json(['error' => 'No se permiten valores nulos en los campos de usuarios ICA o contraseñas ICA.'], 400);
-            }
-        }
-
-        if (in_array(null, (array)$request->usuarios_eps, true) == false || in_array(null, (array)$request->clave_eps, true) == false) {
-            if (in_array(null, (array)$request->usuarios_eps, true) == true || in_array(null, (array)$request->clave_eps, true) == true) {
-                return response()->json(['error' => 'No se permiten valores nulos en los campos de usuarios EPS o contraseñas EPS.'], 400);
-            }
-        }
-
-        if (in_array(null, (array)$request->usuarios_afp, true) == false || in_array(null, (array)$request->clave_afp, true) == false) {
-            if (in_array(null, (array)$request->usuarios_afp, true) == true || in_array(null, (array)$request->clave_afp, true) == true) {
-                return response()->json(['error' => 'No se permiten valores nulos en los campos de usuarios AFP o contraseñas AFP.'], 400);
-            }
-        }
-
-        if (in_array(null, (array)$request->usuarios_pila, true) == false || in_array(null, (array)$request->clave_pila, true) == false) {
-            if (in_array(null, (array)$request->usuarios_pila, true) == true || in_array(null, (array)$request->clave_pila, true) == true) {
-                return response()->json(['error' => 'No se permiten valores nulos en los campos de usuarios Operador de PILA o contraseñas Operador de PILA.'], 400);
-            }
-        }
-
-        if (in_array(null, (array)$request->usuarios_camaracomercio, true) == false || in_array(null, (array)$request->clave_camaracomercio, true) == false) {
-            if (in_array(null, (array)$request->usuarios_camaracomercio, true) == true || in_array(null, (array)$request->clave_camaracomercio, true) == true) {
-                return response()->json(['error' => 'No se permiten valores nulos en los campos de usuarios cámara de comercio o contraseñas cámara de comercio.'], 400);
-            }
-        }
-
 
         $request = $request->merge(['obligaciones' => $obligaciones]);
         $request = $request->merge(['empleados' => $empleados]);
@@ -420,44 +390,6 @@ class EmpresaController extends Controller
     {
         $cliente = Empresa::find($id);
         $clasificacion = Clasificacion::where('empresa_id', $id)->where('anio', $request->anio)->first();
-
-        if (in_array(null, $request->usuario_ica, true) == false || in_array(null, $request->icaclaveportal, true) == false) {
-            if (in_array(null, $request->usuario_ica, true) == true || in_array(null, $request->icaclaveportal, true) == true) {
-                return response()->json(['error' => 'No se permiten valores nulos en los campos de usuarios ICA o contraseñas ICA.'], 400);
-            }
-        }
-
-        if ($request->usuarios_eps) {
-            if (in_array(null, $request->usuarios_eps, true) == false || in_array(null, $request->clave_eps, true) == false) {
-                if (in_array(null, $request->usuarios_eps, true) == true || in_array(null, $request->clave_eps, true) == true) {
-                    return response()->json(['error' => 'No se permiten valores nulos en los campos de usuarios EPS o contraseñas EPS.'], 400);
-                }
-            }
-        }
-
-        if ($request->usuarios_afp) {
-            if (in_array(null, $request->usuarios_afp, true) == false || in_array(null, $request->clave_afp, true) == false) {
-                if (in_array(null, $request->usuarios_afp, true) == true || in_array(null, $request->clave_afp, true) == true) {
-                    return response()->json(['error' => 'No se permiten valores nulos en los campos de usuarios AFP o contraseñas AFP.'], 400);
-                }
-            }
-        }
-
-        if ($request->usuarios_pila) {
-            if (in_array(null, $request->usuarios_pila, true) == false || in_array(null, $request->clave_pila, true) == false) {
-                if (in_array(null, $request->usuarios_pila, true) == true || in_array(null, $request->clave_pila, true) == true) {
-                    return response()->json(['error' => 'No se permiten valores nulos en los campos de usuarios Operador de PILA o contraseñas Operador de PILA.'], 400);
-                }
-            }
-        }
-
-        if ($request->usuarios_camaracomercio) {
-            if (in_array(null, $request->usuarios_camaracomercio, true) == false || in_array(null, $request->clave_camaracomercio, true) == false) {
-                if (in_array(null, $request->usuarios_camaracomercio, true) == true || in_array(null, $request->clave_camaracomercio, true) == true) {
-                    return response()->json(['error' => 'No se permiten valores nulos en los campos de usuarios cámara de comercio o contraseñas cámara de comercio.'], 400);
-                }
-            }
-        }
 
         $camaraComercio = $request->camaracomercio_id;
         $parts = explode('-', $camaraComercio);
