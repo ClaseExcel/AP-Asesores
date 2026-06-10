@@ -258,8 +258,13 @@
         const tbody = document.querySelector('#actividadesTable tbody');
         tbody.innerHTML = '';
         actividadesArray.forEach(item => {
-            const actividadRaw = document.querySelector(`#actividadesList option[value^="${item[0]}"]`)
-                ?.value || item[0];
+            // Buscar la opción que tenga el mismo ID exacto (evitar coincidencias parciales como '1' con '11')
+            const opciones = document.querySelectorAll('#actividadesList option');
+            let actividadRaw = item[0];
+            opciones.forEach(opt => {
+                const id = opt.value.split(' - ')[0];
+                if (id === item[0]) actividadRaw = opt.value;
+            });
             const row = document.createElement('tr');
             row.innerHTML = `
             <td>${actividadRaw}</td>
