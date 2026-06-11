@@ -86,7 +86,7 @@ class CotizacionController extends Controller
         $responsables = User::orderBy('nombres')->select('nombres', 'apellidos', 'id')->where('estado', 'ACTIVO')->get();
         $fechaEnvioInicial = Cotizacion::select('fecha_envio')->orderBy('fecha_envio', 'ASC')->get()->first();
         $fechaEnvioFinal = Cotizacion::select('fecha_envio')->orderBy('fecha_envio', 'DESC')->get()->first();
-        $estados = ['Enviado', 'En estudio', 'Aprobado', 'Rechazado'];
+        $estados = ['Cotizado', 'En estudio', 'Aprobado', 'Rechazado'];
 
         return view('admin.cotizaciones.index', compact('empresas', 'responsables', 'fechaEnvioInicial', 'fechaEnvioFinal', 'estados'));
     }
@@ -121,7 +121,7 @@ class CotizacionController extends Controller
     public function store(StoreCotizacionRequest $request)
     {
 
-        $request = $request->merge(['estado_cotizacion' => 'Enviado']);
+        $request = $request->merge(['estado_cotizacion' => 'Cotizado']);
         $documento_cotizacion = null;
 
         if ($request->file('documento_adjunto')) {

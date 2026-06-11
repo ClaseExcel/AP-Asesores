@@ -53,7 +53,7 @@
                         </td>
                         <td>
                             <textarea class="form-control" name="observaciones[{{ $actividad->id }}]" id="observaciones{{ $actividad->id }}"
-                                rows="1">{{ $observaciones ? $observaciones[$actividad->id] : '' }}</textarea>
+                                rows="1">{{ isset($observaciones[$actividad->id]) ? $observaciones[$actividad->id] : '' }}</textarea>
                         </td>
                     </tr>
                 @endforeach

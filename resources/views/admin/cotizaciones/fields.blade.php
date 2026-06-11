@@ -221,8 +221,7 @@
     </div>
 
     <div class="col-xl-12 mb-3">
-        <label for="observacion_primer_seguimiento" class="fw-normal">Observación primer seguimiento: <b
-                class="text-danger">*</b></label>
+        <label for="observacion_primer_seguimiento" class="fw-normal">Observación primer seguimiento: </label>
         <textarea id="observacion_primer_seguimiento" name="observacion_primer_seguimiento"> {!! old('observacion_primer_seguimiento',$cotizacion->observacion_primer_seguimiento) !!} </textarea>
 
         @if ($errors->has('observacion_primer_seguimiento'))
