@@ -135,18 +135,18 @@
         <div class="form-floating mb-3">
             <select class="form-select" name="linea_negocio" id="linea_negocio">
                 <option value="">Selecciona una opción</option>
-                <option value="PC"
-                    {{ old('linea_negocio', $cotizacion->linea_negocio) == 'PC' ? 'selected' : ' ' }}>PC</option>
-                <option value="PT"
-                    {{ old('linea_negocio', $cotizacion->linea_negocio) == 'PT' ? 'selected' : ' ' }}>PT</option>
-                <option value="TT"
-                    {{ old('linea_negocio', $cotizacion->linea_negocio) == 'TT' ? 'selected' : ' ' }}>TT</option>
-                <option value="RF"
-                    {{ old('linea_negocio', $cotizacion->linea_negocio) == 'RF' ? 'selected' : ' ' }}>RF</option>
-                <option value="PF"
-                    {{ old('linea_negocio', $cotizacion->linea_negocio) == 'PF' ? 'selected' : ' ' }}>PF</option>
-                <option value="PE"
-                    {{ old('linea_negocio', $cotizacion->linea_negocio) == 'PE' ? 'selected' : ' ' }}>PE</option>
+                <option value="Asesoria Contable"
+                    {{ old('linea_negocio', $cotizacion->linea_negocio) == 'Asesoria Contable' ? 'selected' : '' }}>Asesoría Contable</option>
+                <option value="Outsourcing Contable"
+                    {{ old('linea_negocio', $cotizacion->linea_negocio) == 'Outsourcing Contable' ? 'selected' : '' }}>Outsourcing Contable</option>
+                <option value="Revisoria Fiscal"
+                    {{ old('linea_negocio', $cotizacion->linea_negocio) == 'Revisoria Fiscal' ? 'selected' : '' }}>Revisoría Fiscal</option>
+                <option value="Asesoria Laboral Y Nomina"
+                    {{ old('linea_negocio', $cotizacion->linea_negocio) == 'Asesoria Laboral Y Nomina' ? 'selected' : '' }}>Asesoría Laboral Y Nomina</option>
+                <option value="Servicios Legales"
+                    {{ old('linea_negocio', $cotizacion->linea_negocio) == 'Servicios Legales' ? 'selected' : '' }}>Servicios Legales</option>
+                <option value="Otros Servicios Contables/Juridicos"
+                    {{ old('linea_negocio', $cotizacion->linea_negocio) == 'Otros Servicios Contables/Juridicos' ? 'selected' : '' }}>Otros Servicios Contables/Jurídicos</option>
             </select>
             <label class="fw-normal" for="linea_negocio">Línea de negocio </label>
             @if ($errors->has('linea_negocio'))

@@ -55,12 +55,12 @@
                     <div class="form-group">
                         <select class="form-select" name="" id="linea_negocio">
                             <option class="text-secondary" value="">Ninguna línea de negocio</option>
-                            <option value="PC">PC</option>
-                            <option value="PT">PT</option>
-                            <option value="TT">TT</option>
-                            <option value="RF">RF</option>
-                            <option value="PF">PF</option>
-                            <option value="PE">PE</option>
+                            <option value="Asesoria Contable">Asesoría Contable</option>
+                            <option value="Outsourcing Contable">Outsourcing Contable</option>
+                            <option value="Revisoria Fiscal">Revisoría Fiscal</option>
+                            <option value="Asesoria Laboral Y Nomina">Asesoría Laboral Y Nómina</option>
+                            <option value="Servicios Legales">Servicios Legales</option>
+                            <option value="Otros Servicios Contables/Juridicos">Otros Servicios Contables/Jurídicos</option>
                         </select>
                     </div>
                 </div>
