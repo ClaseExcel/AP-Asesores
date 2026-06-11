@@ -142,7 +142,7 @@
                 <option value="Revisoria Fiscal"
                     {{ old('linea_negocio', $cotizacion->linea_negocio) == 'Revisoria Fiscal' ? 'selected' : '' }}>Revisoría Fiscal</option>
                 <option value="Asesoria Laboral Y Nomina"
-                    {{ old('linea_negocio', $cotizacion->linea_negocio) == 'Asesoria Laboral Y Nomina' ? 'selected' : '' }}>Asesoría Laboral Y Nomina</option>
+                    {{ old('linea_negocio', $cotizacion->linea_negocio) == 'Asesoria Laboral Y Nomina' ? 'selected' : '' }}>Asesoría Laboral Y Nómina</option>
                 <option value="Servicios Legales"
                     {{ old('linea_negocio', $cotizacion->linea_negocio) == 'Servicios Legales' ? 'selected' : '' }}>Servicios Legales</option>
                 <option value="Otros Servicios Contables/Juridicos"
