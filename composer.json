@@ -17,6 +17,7 @@
         "netflie/laravel-notification-whatsapp": "^1.3",
         "nuovo/spreadsheet-reader": "^0.5.11",
         "pusher/pusher-php-server": "^7.2",
+        "realrashid/sweet-alert": "^7.3",
         "spatie/icalendar-generator": "^2.8",
         "spatie/laravel-backup": "^8.2",
         "yajra/laravel-datatables-oracle": "^11.0.0"

@@ -47,6 +47,8 @@
 
 <body class="sidebar-mini layout-fixed" style="height: auto;">
 
+    @include('sweetalert::alert')
+
     @php
         use App\Models\EmpleadoCliente;
         use App\Models\Empresa;

@@ -25,6 +25,7 @@ use App\Notifications\MessageSent;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CotizacionController extends Controller
 {
@@ -59,7 +60,7 @@ class CotizacionController extends Controller
 
                     foreach ($clientes as  $cliente) {
                         $precios = Cotizacion::where('cliente', $cliente->cliente)->select('precio_venta')->get();
-                        $total_precio = $precios->sum('precio_venta');  
+                        $total_precio = $precios->sum('precio_venta');
 
                         return $total_precio;
                     }
@@ -69,7 +70,12 @@ class CotizacionController extends Controller
                     $reportar = '<a href="' . route("admin.cotizacion-seguimiento.index", $cotizaciones->id) . '" title="Reportar seguimiento" class="btn-eliminar px-2">
                     <i class="fa-solid fa-clipboard"></i>
                     </a>';
-                    return $this->getActionButtons('admin.cotizaciones', 'COTIZACIONES', $cotizaciones->id) . $reportar;
+
+                    $correoCotizacion = '<a href="' . route("admin.email-cotizacion", $cotizaciones->id) . '" title="Enviar correo" class="btn-eliminar px-2">
+                   <i class="fa-solid fa-envelope-open-text"></i>
+                    </a>';
+
+                    return $this->getActionButtons('admin.cotizaciones', 'COTIZACIONES', $cotizaciones->id) . $correoCotizacion . $reportar;
                 })
                 ->rawColumns(['actions']) //para que se muestre el codigo html en la tabla
                 ->make(true);
@@ -124,19 +130,18 @@ class CotizacionController extends Controller
         $request = $request->merge(['estado_cotizacion' => 'Cotizado']);
         $documento_cotizacion = null;
 
+        $cotizacion = Cotizacion::create($request->all());
+
         if ($request->file('documento_adjunto')) {
-            $foldername = 'cotizacion_' . $request->numero_cotizacion;
             $archivo = $request->file('documento_adjunto');
 
-            $documento = $archivo->getClientOriginalName();
-            $documento_cotizacion = 'storage/cotizacion/' . $foldername . '/' . $archivo->getClientOriginalName();
+            $documento = 'cotizacion_' . $cotizacion->numero_cotizacion . '.' . $archivo->getClientOriginalExtension();
 
-            Storage::disk('cotizacion')->put($foldername . '/' . $documento, File::get($archivo));
+            $archivo->storeAs('public/cotizacion', $documento);
+            $documento_cotizacion = 'storage/cotizacion/' . $documento;
         }
 
-        $request = $request->merge(['cotizacion_adjunta' => $documento_cotizacion]);
-
-        $cotizacion = Cotizacion::create($request->all());
+        $cotizacion->update(['cotizacion_adjunta' => $documento_cotizacion]);
 
         return redirect()->route('admin.cotizaciones.index')->with('message', 'La cotización se ha creado correctamente.')->with('color', 'success');
     }
@@ -197,17 +202,16 @@ class CotizacionController extends Controller
         $cotizacion = Cotizacion::find($id);
 
         if ($request->file('documento_adjunto')) {
-            $foldername = 'cotizacion_' . $request->numero_cotizacion;
             $archivo = $request->file('documento_adjunto');
 
             if (File::exists($cotizacion->cotizacion_adjunta)) {
                 File::delete($cotizacion->cotizacion_adjunta);
             }
 
-            $documento = $archivo->getClientOriginalName();
-            $documento_cotizacion = 'storage/cotizacion/' . $foldername . '/' . $archivo->getClientOriginalName();
+            $documento = 'cotizacion_' . $cotizacion->numero_cotizacion . '.' . $archivo->getClientOriginalExtension();
 
-            Storage::disk('cotizacion')->put($foldername . '/' . $documento, File::get($archivo));
+            $archivo->storeAs('public/cotizacion', $documento);
+            $documento_cotizacion = 'storage/cotizacion/' . $documento;
         } else {
             $documento_cotizacion = $cotizacion->cotizacion_adjunta;
         }
@@ -308,6 +312,37 @@ class CotizacionController extends Controller
         $seguimiento_cotizacion->update($request->all());
 
         return redirect()->route('admin.cotizaciones.show', $request->cotizacion_id)->with('message', 'La cotización se ha editado correctamente.')->with('color', 'success');
+    }
+
+    public function emailCotizacion($id, Request $request)
+    {
+        $cotizacion = Cotizacion::find($id);
+
+        if (!$cotizacion) {
+            Alert::warning('Cotización no encontrada');
+            return redirect()->back();
+        }
+
+        $email = $request->email ?? $cotizacion->responsable->email;
+        $pdf_path = $cotizacion->cotizacion_adjunta;
+        $cliente = $cotizacion->cliente;
+
+        Mail::send('emails.cotizacion', [
+            'cotizacion' => $cotizacion,
+            'linea_negocio' => $cotizacion->linea_negocio ?? 'No especificada',
+            'observacion' => $cotizacion->observaciones ?? '',
+            'cliente' => $cliente,
+        ], function ($message) use ($email, $cotizacion, $pdf_path) {
+            $message->to($email)
+                ->subject('Cotización #' . $cotizacion->numero_cotizacion);
+
+            if ($pdf_path && file_exists($pdf_path)) {
+                $message->attach($pdf_path);
+            }
+        });
+
+        Alert::success('Cotización enviada', 'Tu cotización ha sido enviada existosamente');
+        return redirect()->back();
     }
 
 

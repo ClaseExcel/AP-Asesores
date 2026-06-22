@@ -32,7 +32,7 @@
                                 caracter confidencial. Si no
                                 es el destinatario de este correo y lo recibió por error comuníquelo de inmediato,
                                 respondiendo a
-                                info@helpdigital.com.co y eliminando cualquier copia que pueda tener del mismo. Si no es
+                                apasesorescontables@gmail.com y eliminando cualquier copia que pueda tener del mismo. Si no es
                                 el destinatario, no podrá
                                 usar su contenido, de hacerlo podría tener consecuencias legales como las contenidas en
                                 la Ley 1273 del 5 de
@@ -50,7 +50,7 @@
                                 not the intended
                                 recipient of this email and received it in error, please notify us immediately by
                                 responding to
-                                info@helpdigital.com.co and delete any copies you may have. If you are not the intended
+                                apasesorescontables@gmail.com and delete any copies you may have. If you are not the intended
                                 recipient, you are not
                                 allowed to use its content; doing so may have legal consequences as outlined in Law 1273
                                 of January 5, 2009, and

@@ -34,7 +34,6 @@ class UpdateCotizacionRequest extends FormRequest
             'servicio_cotizado' => 'required',
             'precio_venta' => 'required',
             'fecha_primer_seguimiento' => 'required',
-            'observacion_primer_seguimiento' => 'required',
         ];
     }
 
@@ -50,7 +49,6 @@ class UpdateCotizacionRequest extends FormRequest
             'servicio_cotizado.required' => __('Ingresa el servicio que esta cotizando el cliente.'),
             'precio_venta.required' => __('Ingresa el precio de la cotización.'),
             'fecha_primer_seguimiento.required' => __('Selecciona la fecha del primer seguimiento.'),
-            'observacion_primer_seguimiento.required' => __('Ingresa la observación del primer seguimiento.'),
         ];
     }
 }

@@ -12,4 +12,5 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('cotizaciones/store-seguimiento/{id}', [CotizacionController::class, 'storeSeguimiento'])->name('cotizacion-seguimiento.store');
     Route::get('cotizaciones/edit-seguimiento/{id}/{cotizacion}', [CotizacionController::class, 'editSeguimiento'])->name('cotizacion-seguimiento.edit');
     Route::put('cotizaciones/update-seguimiento/{id}', [CotizacionController::class, 'updateSeguimiento'])->name('cotizacion-seguimiento.update');
+    Route::get('cotizaciones/email-cotizacion/{id}', [CotizacionController::class, 'emailCotizacion'])->name('email-cotizacion');
 });
